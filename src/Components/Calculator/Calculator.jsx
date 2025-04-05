@@ -1,7 +1,10 @@
+import "./Calculator.css";
 const Calculator = () => {
-    return <div>
-        Hey.
-    </div>;
-}
+  return (
+    <div className="bg">
+      <div className="wrapper"></div>
+    </div>
+  );
+};
 
 export default Calculator;
