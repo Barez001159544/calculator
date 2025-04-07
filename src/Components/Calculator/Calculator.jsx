@@ -2,6 +2,7 @@ import "./Calculator.css";
 import ButtonBox from "./ButtonBox";
 import Button from "./Button";
 import Screen from "./Screen";
+import React, { useState } from "react";
 
 const btnValues = [
   ["C", "+-", "%", "÷"],
@@ -12,10 +13,12 @@ const btnValues = [
 ];
 
 const Calculator = () => {
+  const [equation, setEquation] = useState("0");
+
   return (
     <div className="bg">
       <div className="wrapper">
-        <Screen value={0} />
+        <Screen value={equation} />
         <ButtonBox>
           {btnValues.flat().map((btn, i) => {
             return (
@@ -24,6 +27,10 @@ const Calculator = () => {
                 className={btn === "=" ? "equals" : ""}
                 value={btn}
                 onClick={() => {
+                  const btnStr = btn.toString(); // force btn to string
+                  const newEquation =
+                    equation === "0" ? btnStr : equation + btnStr;
+                  setEquation(newEquation);
                   console.log(`${btn} clicked!`);
                 }}
               />
