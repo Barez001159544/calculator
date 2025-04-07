@@ -59,7 +59,7 @@ const Calculator = () => {
 
                     let newEquation = "";
                     if (btnStr === "+-") {
-                      if (lastChar !== "-") {
+                      if (lastChar !== "-" && lastChar !== ".") {
                         newEquation = equation === "0" ? "-" : equation + "-";
                       } else {
                         return;
