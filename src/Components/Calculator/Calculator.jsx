@@ -27,18 +27,47 @@ const Calculator = () => {
                 className={btn === "=" ? "equals" : ""}
                 value={btn}
                 onClick={() => {
-                  const btnStr = btn.toString();
+                  let btnStr = btn.toString();
                   if (btnStr === "=") {
                     const sanitizedEquation = equation
                       .replace(/×/g, "*")
                       .replace(/÷/g, "/");
+                    const lastChar = sanitizedEquation.slice(-1);
+                    if (/[+\-*/.]/.test(lastChar)) {
+                      return;
+                    }
                     const result = eval(sanitizedEquation).toString();
                     setEquation(result);
                   } else if (btnStr === "C") {
                     setEquation("0");
+                  } else if (btnStr === "%") {
+                    const hasOperator = /[+\-*/×÷]/.test(equation);
+                    if (hasOperator) {
+                      return;
+                    }
+                    // FINISH THIS!
                   } else {
-                    const newEquation =
-                      equation === "0" ? btnStr : equation + btnStr;
+                    const operators = ["+", "-", "*", "/", ".", "×", "÷"];
+                    const lastChar = equation.slice(-1);
+
+                    const isLastCharOperator = operators.includes(lastChar);
+                    const isBtnOperator = operators.includes(btnStr);
+
+                    if (isLastCharOperator && isBtnOperator) {
+                      return;
+                    }
+
+                    let newEquation = "";
+                    if (btnStr === "+-") {
+                      if (lastChar !== "-") {
+                        newEquation = equation === "0" ? "-" : equation + "-";
+                      } else {
+                        return;
+                      }
+                    } else {
+                      newEquation =
+                        equation === "0" ? btnStr : equation + btnStr;
+                    }
                     setEquation(newEquation);
                   }
                 }}
