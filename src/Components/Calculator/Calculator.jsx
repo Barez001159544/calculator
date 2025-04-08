@@ -47,7 +47,8 @@ const Calculator = () => {
                     if (hasOperator) {
                       return;
                     }
-                    // FINISH THIS!
+                    const result = eval(equation + "/10").toString();
+                    setEquation(result);
                   } else {
                     const operators = ["+", "-", "*", "/", ".", "×", "÷"];
                     const lastChar = equation.slice(-1);
