@@ -3,7 +3,8 @@ import ButtonBox from "./ButtonBox";
 import Button from "./Button";
 import Screen from "./Screen";
 import React, { useState } from "react";
-import Background from "./background";
+import CalculatorBackground from "./CalculatorBackground";
+import Wrapper from "./Wrapper";
 
 const btnValues = [
   ["C", "+-", "%", "÷"],
@@ -17,8 +18,8 @@ const Calculator = () => {
   const [equation, setEquation] = useState("0");
 
   return (
-    <Background>
-      <div className="wrapper">
+    <CalculatorBackground>
+      <Wrapper>
         <Screen value={equation} />
         <ButtonBox>
           {btnValues.flat().map((btn, i) => {
@@ -76,8 +77,8 @@ const Calculator = () => {
             );
           })}
         </ButtonBox>
-      </div>
-    </Background>
+      </Wrapper>
+    </CalculatorBackground>
   );
 };
 
