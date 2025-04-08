@@ -8,10 +8,10 @@ import Wrapper from "./Wrapper";
 
 const btnValues = [
   ["C", "+-", "%", "÷"],
-  [7, 8, 9, "×"],
-  [4, 5, 6, "-"],
-  [1, 2, 3, "+"],
-  [0, ".", "="],
+  ["7", "8", "9", "×"],
+  ["4", "5", "6", "-"],
+  ["1", "2", "3", "+"],
+  ["0", ".", "="],
 ];
 
 const Calculator = () => {
@@ -29,7 +29,7 @@ const Calculator = () => {
                 className={btn === "=" ? "equals" : ""}
                 value={btn}
                 onClick={() => {
-                  let btnStr = btn.toString();
+                  let btnStr = btn;
                   if (btnStr === "=") {
                     const sanitizedEquation = equation
                       .replace(/×/g, "*")
