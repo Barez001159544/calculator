@@ -17,6 +17,53 @@ const btnValues = [
 const Calculator = () => {
   const [equation, setEquation] = useState("0");
 
+  const EqualHandler = () => {
+    const sanitizedEquation = equation.replace(/×/g, "*").replace(/÷/g, "/");
+    const lastChar = sanitizedEquation.slice(-1);
+    if (/[+\-*/.]/.test(lastChar)) {
+      return;
+    }
+    const result = eval(sanitizedEquation).toString();
+    setEquation(result);
+  };
+
+  const CleanHandler = () => {
+    setEquation("0");
+  };
+
+  const PercentageHandler = () => {
+    const hasOperator = /[+\-*/×÷]/.test(equation);
+    if (hasOperator) {
+      return;
+    }
+    const result = eval(equation + "/10").toString();
+    setEquation(result);
+  };
+
+  const NumbersAndOperatorsHandler = () => {
+    const operators = ["+", "-", "*", "/", ".", "×", "÷"];
+    const lastChar = equation.slice(-1);
+
+    const isLastCharOperator = operators.includes(lastChar);
+    const isBtnOperator = operators.includes(btnStr);
+
+    if (isLastCharOperator && isBtnOperator) {
+      return;
+    }
+
+    let newEquation = "";
+    if (btnStr === "+-") {
+      if (lastChar !== "-" && lastChar !== ".") {
+        newEquation = equation === "0" ? "-" : equation + "-";
+      } else {
+        return;
+      }
+    } else {
+      newEquation = equation === "0" ? btnStr : equation + btnStr;
+    }
+    setEquation(newEquation);
+  };
+
   return (
     <CalculatorBackground>
       <Wrapper>
@@ -31,47 +78,13 @@ const Calculator = () => {
                 onClick={() => {
                   let btnStr = btn;
                   if (btnStr === "=") {
-                    const sanitizedEquation = equation
-                      .replace(/×/g, "*")
-                      .replace(/÷/g, "/");
-                    const lastChar = sanitizedEquation.slice(-1);
-                    if (/[+\-*/.]/.test(lastChar)) {
-                      return;
-                    }
-                    const result = eval(sanitizedEquation).toString();
-                    setEquation(result);
+                    EqualHandler;
                   } else if (btnStr === "C") {
-                    setEquation("0");
+                    CleanHandler;
                   } else if (btnStr === "%") {
-                    const hasOperator = /[+\-*/×÷]/.test(equation);
-                    if (hasOperator) {
-                      return;
-                    }
-                    const result = eval(equation + "/10").toString();
-                    setEquation(result);
+                    PercentageHandler;
                   } else {
-                    const operators = ["+", "-", "*", "/", ".", "×", "÷"];
-                    const lastChar = equation.slice(-1);
-
-                    const isLastCharOperator = operators.includes(lastChar);
-                    const isBtnOperator = operators.includes(btnStr);
-
-                    if (isLastCharOperator && isBtnOperator) {
-                      return;
-                    }
-
-                    let newEquation = "";
-                    if (btnStr === "+-") {
-                      if (lastChar !== "-" && lastChar !== ".") {
-                        newEquation = equation === "0" ? "-" : equation + "-";
-                      } else {
-                        return;
-                      }
-                    } else {
-                      newEquation =
-                        equation === "0" ? btnStr : equation + btnStr;
-                    }
-                    setEquation(newEquation);
+                    NumbersAndOperatorsHandler;
                   }
                 }}
               />
