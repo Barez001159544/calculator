@@ -3,6 +3,7 @@ import ButtonBox from "./ButtonBox";
 import Button from "./Button";
 import Screen from "./Screen";
 import React, { useState } from "react";
+import Background from "./background";
 
 const btnValues = [
   ["C", "+-", "%", "÷"],
@@ -16,7 +17,7 @@ const Calculator = () => {
   const [equation, setEquation] = useState("0");
 
   return (
-    <div className="bg">
+    <Background>
       <div className="wrapper">
         <Screen value={equation} />
         <ButtonBox>
@@ -76,7 +77,7 @@ const Calculator = () => {
           })}
         </ButtonBox>
       </div>
-    </div>
+    </Background>
   );
 };
 
