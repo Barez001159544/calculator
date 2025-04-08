@@ -47,6 +47,10 @@ const Calculator = () => {
     const isLastCharOperator = operators.includes(lastChar);
     const isBtnOperator = operators.includes(btn);
 
+    if (equation === "0" && isBtnOperator && btn !== "-") {
+      return;
+    }
+
     if (isLastCharOperator && isBtnOperator) {
       return;
     }
