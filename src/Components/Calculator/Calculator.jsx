@@ -40,26 +40,26 @@ const Calculator = () => {
     setEquation(result);
   };
 
-  const NumbersAndOperatorsHandler = () => {
+  const NumbersAndOperatorsHandler = (btn) => {
     const operators = ["+", "-", "*", "/", ".", "×", "÷"];
     const lastChar = equation.slice(-1);
 
     const isLastCharOperator = operators.includes(lastChar);
-    const isBtnOperator = operators.includes(btnStr);
+    const isBtnOperator = operators.includes(btn);
 
     if (isLastCharOperator && isBtnOperator) {
       return;
     }
 
     let newEquation = "";
-    if (btnStr === "+-") {
+    if (btn === "+-") {
       if (lastChar !== "-" && lastChar !== ".") {
         newEquation = equation === "0" ? "-" : equation + "-";
       } else {
         return;
       }
     } else {
-      newEquation = equation === "0" ? btnStr : equation + btnStr;
+      newEquation = equation === "0" ? btn : equation + btn;
     }
     setEquation(newEquation);
   };
@@ -76,15 +76,14 @@ const Calculator = () => {
                 className={btn === "=" ? "equals" : ""}
                 value={btn}
                 onClick={() => {
-                  let btnStr = btn;
-                  if (btnStr === "=") {
-                    EqualHandler;
-                  } else if (btnStr === "C") {
-                    CleanHandler;
-                  } else if (btnStr === "%") {
-                    PercentageHandler;
+                  if (btn === "=") {
+                    EqualHandler();
+                  } else if (btn === "C") {
+                    CleanHandler();
+                  } else if (btn === "%") {
+                    PercentageHandler();
                   } else {
-                    NumbersAndOperatorsHandler;
+                    NumbersAndOperatorsHandler(btn);
                   }
                 }}
               />
