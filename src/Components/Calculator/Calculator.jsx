@@ -15,6 +15,7 @@ const btnValues = [
 ];
 
 const Calculator = () => {
+  const [previously, setPreviously] = useState();
   const [equation, setEquation] = useState("0");
 
   const EqualHandler = () => {
@@ -25,10 +26,12 @@ const Calculator = () => {
     }
     const result = eval(sanitizedEquation).toString();
     setEquation(result);
+    setPreviously(equation);
   };
 
   const CleanHandler = () => {
     setEquation("0");
+    setPreviously();
   };
 
   const PercentageHandler = () => {
@@ -38,6 +41,7 @@ const Calculator = () => {
     }
     const result = eval(equation + "/10").toString();
     setEquation(result);
+    setPreviously(equation + "%");
   };
 
   const NumbersAndOperatorsHandler = (btn) => {
@@ -71,7 +75,7 @@ const Calculator = () => {
   return (
     <CalculatorBackground>
       <Wrapper>
-        <Screen value={equation} />
+        <Screen value={equation} previously={previously} />
         <ButtonBox>
           {btnValues.flat().map((btn, i) => {
             return (

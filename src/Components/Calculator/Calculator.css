@@ -23,11 +23,23 @@
   background-color: #eaeaea;
   border-radius: 10px;
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: end;
+  justify-content: center;
   color: #797979;
   font-weight: bold;
   box-sizing: border-box;
+}
+
+.screen h2 {
+  font-size: 20px;
+}
+
+.screen .medium {
+  font-size: 60px;
+}
+
+.screen .large {
   font-size: 70px;
 }
 
