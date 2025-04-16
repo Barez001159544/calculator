@@ -1,10 +1,10 @@
-# React Authentication
+# React Calculator
 
 A simple and clean React project featuring a fully functional calculator with support for all basic arithmetic operations.
 
 ## Screenshots
 
-Screen 1                   |
+UI                         |
 :-------------------------:|
 ![Screenshot (216)](https://github.com/user-attachments/assets/b262786c-864c-4aaa-acd9-08384ea35458)
 
